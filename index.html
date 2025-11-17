@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ripple TS Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Recursive:wght@400;500;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Recursive', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background-color: #0a0a0f;
+        color: white;
+      }
+      .font-roboto-mono {
+        font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+      }
+
+      /* Starry background effect */
+      .starry-background::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+          radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.15), transparent),
+          radial-gradient(1px 1px at 40px 70px, rgba(120, 219, 226, 0.4), transparent),
+          radial-gradient(1px 1px at 90px 40px, rgba(255, 119, 198, 0.3), transparent),
+          radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.1), transparent),
+          radial-gradient(2px 2px at 160px 30px, rgba(120, 219, 226, 0.2), transparent);
+        background-repeat: repeat;
+        background-size: 200px 100px, 200px 100px, 200px 100px, 200px 100px, 200px 100px;
+        animation: starTwinkle 8s linear infinite;
+        z-index: -2;
+      }
+      
+      /* Nebula effect */
+      .starry-background::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+          radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
+          radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.1) 0%, transparent 50%);
+        z-index: -1;
+      }
+      
+      @keyframes starTwinkle {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+
+      /* Logo glow effect */
+      .logo-animate {
+        filter: drop-shadow(0 0 30px rgba(120, 219, 226, 0.6))
+					drop-shadow(0 0 60px rgba(255, 119, 198, 0.6))
+					drop-shadow(0 0 90px rgba(120, 119, 198, 0.4));
+        animation: glowFadeOut 3s ease-in-out forwards;
+      }
+      
+      @keyframes glowFadeOut {
+        0% {
+          filter: drop-shadow(0 0 30px rgba(120, 219, 226, 0.6))
+            drop-shadow(0 0 60px rgba(255, 119, 198, 0.6))
+            drop-shadow(0 0 90px rgba(120, 119, 198, 0.4));
+        }
+        100% {
+          filter: drop-shadow(0 0 30px rgba(120, 219, 226, 0))
+            drop-shadow(0 0 60px rgba(255, 119, 198, 0))
+            drop-shadow(0 0 90px rgba(120, 119, 198, 0));
+        }
+      }
+
+      /* Editor slide-in effect */
+      .editor-animate {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: editorSlideIn 1s ease-out 0.5s forwards;
+      }
+
+      @keyframes editorSlideIn {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      /* Typewriter cursor */
+      .typing-cursor {
+        background-color: #78dbe2;
+        animation: blink 1s infinite;
+      }
+
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+      
+      /* Particle animations */
+      @keyframes drift {
+        0% { transform: translateX(0) translateY(0) rotate(0deg); }
+        25% { transform: translateX(100px) translateY(-50px) rotate(90deg); }
+        50% { transform: translateX(-50px) translateY(-100px) rotate(180deg); }
+        75% { transform: translateX(-100px) translateY(50px) rotate(270deg); }
+        100% { transform: translateX(0) translateY(0) rotate(360deg); }
+      }
+      
+      @keyframes pulse {
+        0%, 100% { opacity: 0.3; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.5); }
+      }
+
+      .particle-1 { animation: drift 25s linear infinite, pulse 3s ease-in-out infinite; }
+      .particle-2 { animation: drift 30s linear infinite reverse, pulse 4s ease-in-out infinite 1s; }
+      .particle-3 { animation: drift 20s linear infinite, pulse 2.5s ease-in-out infinite 2s; }
+      .particle-4 { animation: drift 35s linear infinite reverse, pulse 3.5s ease-in-out infinite 0.5s; }
+      .particle-5 { animation: drift 22s linear infinite, pulse 2s ease-in-out infinite 1.5s; }
+
+      .editor-code::-webkit-scrollbar { width: 8px; height: 8px; }
+      .editor-code::-webkit-scrollbar-track { background: rgba(20, 20, 25, 0.3); border-radius: 4px; }
+      .editor-code::-webkit-scrollbar-thumb { background: rgba(120, 219, 226, 0.4); border-radius: 4px; transition: background 0.3s ease; }
+      .editor-code::-webkit-scrollbar-thumb:hover { background: rgba(120, 219, 226, 0.6); }
+      .editor-code { scrollbar-width: thin; scrollbar-color: rgba(120, 219, 226, 0.4) rgba(20, 20, 25, 0.3); }
+
+      /* Syntax highlighting styles from original CSS */
+      .keyword { color: #569cd6; }
+      .export-keyword { color: #c586c0; }
+      .string { color: #ce9178; }
+      .component { color: #4ec9b0; }
+      .function { color: #dcdcaa; }
+      .property { color: #9cdcfe; }
+      .css-selector { color: #d7ba7d; }
+      .control-keyword { color: #c586c0; }
+      .block-brace { color: #c586c0; }
+      .tag { color: #569cd6; }
+      .attribute { color: #92c5f8; }
+      .value { color: #b5cea8; }
+      .comment { color: #6a9955; font-style: italic; }
+      .brace { color: #ffd700; }
+      .css-brace { color: #d4d4d4; }
+      .template-brace { color: #ffd700; }
+      .ripple-syntax { color: #4fc1ff; }
+      .bracket { color: #808080; }
+      .reactive-var { color: #9cdcfe; font-weight: bold; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
